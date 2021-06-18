@@ -1,0 +1,28 @@
+{
+  "name": "exchange-trade",
+  "version": "1.0.0",
+  "description": "Crypto trading through connected exchanges.",
+  "keywords": [
+    "package"
+  ],
+  "homepage": "https://github.com/easytradingguru/exchange-trade",
+  "bugs": {
+    "url": "https://github.com/easytradingguru/exchange-trade/issues",
+    "email": "info@easytrading.guru"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/easytradingguru/exchange-trade.git"
+  },
+  "author": "Easytrading <info@easytrading.guru>",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "engineStrict": false
+}
