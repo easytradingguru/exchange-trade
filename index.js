@@ -1,8 +1,8 @@
 const Exchange = require('./app/classes/exchange')
-const exchangeService = require('./app/internal/exchange')
+const exchangeService = require('./app/services/exchange')
 
-const kucoinExchange = null
-const binanceExchange = null
+let kucoinExchange = null
+let binanceExchange = null
 
 module.exports = {
   createExchanges: (kucoinAddress, binanceAddress) => {
@@ -22,13 +22,13 @@ module.exports = {
     if (kucoinFlag && binanceFlag) {
       return { exchangeNames: ['Kucoin', 'Binance'] }
     } else if (kucoinFlag) {
-      return { exchangeName: 'Kucoin' };
+      return { exchangeName: 'Kucoin' }
     } else if (binanceFlag) {
-      return { exchangeName: 'Binance' };
+      return { exchangeName: 'Binance' }
     }
 
     const error = new Error('No exchange found', 404)
-    throw error; 
+    throw error
   },
 
   createKucoinExchange: (kucoinAddress) => {
@@ -36,7 +36,7 @@ module.exports = {
       kucoinExchange = new Exchange(kucoinAddress, 'Kucoin')
     }
 
-    return { exchangeName: 'Kucoin' };
+    return { exchangeName: 'Kucoin' }
   },
 
   createBinanceExchange: (binanceAddress) => {
@@ -44,10 +44,10 @@ module.exports = {
       binanceExchange = new Exchange(binanceAddress, 'Binance')
     }
 
-    return { exchangeName: 'Binance' };
+    return { exchangeName: 'Binance' }
   },
 
-  getBaseSymbols: (exchangeName) => {
+  getBaseSymbols: async (exchangeName) => {
     if (exchangeName === 'Kucoin') {
       return await exchangeService.getBaseSymbols(kucoinExchange.address)
     } else if (exchangeName === 'Binance') {
@@ -55,10 +55,10 @@ module.exports = {
     }
 
     const error = new Error('Invalid exchange name', 404)
-    throw error;
+    throw error
   },
 
-  getQouteSymbols: (exchangeName, baseSymbol) => {
+  getQouteSymbols: async (exchangeName, baseSymbol) => {
     if (exchangeName === 'Kucoin') {
       return await exchangeService.getQouteSymbols(kucoinExchange.address, baseSymbol)
     } else if (exchangeName === 'Binance') {
@@ -66,6 +66,6 @@ module.exports = {
     }
 
     const error = new Error('Invalid exchange name', 404)
-    throw error;
+    throw error
   }
 }
